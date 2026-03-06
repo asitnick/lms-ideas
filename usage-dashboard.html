@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMS Usage Report – Wireframe</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F4F3EF;
+    --surface: #FFFFFF;
+    --border: #E2E0D8;
+    --border-strong: #C8C5BA;
+    --text-primary: #1C1B18;
+    --text-secondary: #6B6860;
+    --text-muted: #A09E98;
+    --accent: #2A5C8F;
+    --accent-light: #EBF2FA;
+    --accent-hover: #1E4570;
+    --group-a: #3B6E52;
+    --group-a-light: #EBF5EF;
+    --group-b: #7A4F2D;
+    --group-b-light: #F7F0E9;
+    --inactive: #E8E6E1;
+    --badge-bg: #FFF8EC;
+    --badge-border: #E8C97A;
+    --badge-text: #7A5A00;
+    --bar-a: rgba(43,92,143,0.18);
+    --bar-b: rgba(59,110,82,0.18);
+    --bar-c: rgba(122,79,45,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── App Shell ── */
+  .shell { display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* ── Top Nav ── */
+  .topnav {
+    background: var(--accent);
+    color: white;
+    padding: 0 28px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+  }
+  .topnav-logo {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0.95;
+  }
+  .topnav-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.25); }
+  .topnav-crumb {
+    font-size: 13px;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topnav-crumb a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.85;
+    cursor: pointer;
+  }
+  .topnav-crumb a:hover { opacity: 1; text-decoration: underline; }
+  .topnav-crumb .sep { opacity: 0.4; }
+  .topnav-crumb .current { opacity: 1; font-weight: 500; }
+  .topnav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+  .topnav-user {
+    font-size: 13px;
+    opacity: 0.8;
+  }
+  .avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* ── Page Header ── */
+  .page-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .page-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 200px;
+  }
+  .page-title span {
+    font-weight: 300;
+    color: var(--text-secondary);
+    font-size: 16px;
+    margin-left: 6px;
+  }
+
+  /* ── Controls ── */
+  .controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+  .year-select {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .year-label {
+    padding: 6px 10px;
+    background: var(--bg);
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-right: 1px solid var(--border-strong);
+    white-space: nowrap;
+  }
+  .year-select select {
+    border: none;
+    background: transparent;
+    padding: 6px 28px 6px 10px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6860' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+  }
+
+  .toggle-group {
+    display: flex;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .toggle-btn {
+    padding: 6px 14px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.15s;
+    border-right: 1px solid var(--border-strong);
+  }
+  .toggle-btn:last-child { border-right: none; }
+  .toggle-btn.active {
+    background: var(--accent);
+    color: white;
+  }
+  .toggle-btn:hover:not(.active) { background: var(--border); }
+
+  .btn-export {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn-export:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+  .btn-export-primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  .btn-export-primary:hover { background: var(--accent-hover); color: white; border-color: var(--accent-hover); }
+
+  /* ── Main Content ── */
+  .main { flex: 1; padding: 24px 28px; overflow-x: auto; }
+
+  /* ── Summary Cards ── */
+  .summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .card-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .card-value {
+    font-size: 26px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .card-sub {
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+  .card-accent { border-top: 3px solid var(--accent); }
+  .card-green { border-top: 3px solid var(--group-a); }
+  .card-brown { border-top: 3px solid var(--group-b); }
+
+  /* ── Table Wrapper ── */
+  .table-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 960px;
+  }
+
+  /* Group header row */
+  .group-header-row th {
+    padding: 8px 12px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--border);
+    vertical-align: bottom;
+  }
+  .gh-school { text-align: left; color: var(--text-muted); }
+  .gh-created {
+    background: var(--group-a-light);
+    color: var(--group-a);
+    text-align: center;
+    border-left: 2px solid var(--group-a);
+    border-right: 2px solid var(--group-a);
+  }
+  .gh-community {
+    background: var(--group-b-light);
+    color: var(--group-b);
+    text-align: center;
+    border-left: 2px solid var(--group-b);
+    border-right: 2px solid var(--group-b);
+  }
+
+  /* Column header row */
+  .col-header-row th {
+    padding: 8px 12px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: right;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--border-strong);
+    position: relative;
+    cursor: default;
+  }
+  .col-header-row th:first-child { text-align: left; }
+  .col-header-row th.created-col {
+    background: var(--group-a-light);
+    border-left: 2px solid var(--group-a);
+    border-right: 2px solid var(--group-a);
+  }
+  .col-header-row th.created-col:first-of-type { border-right: none; }
+  .col-header-row th.created-col:last-of-type { border-left: none; }
+  .col-header-row th.community-col {
+    background: var(--group-b-light);
+    border-left: 2px solid var(--group-b);
+    border-right: 2px solid var(--group-b);
+  }
+  .col-header-row th.community-col:first-of-type { border-right: none; }
+  .col-header-row th.community-col:last-of-type { border-left: none; }
+
+  .th-inner { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
+  .th-inner.left { justify-content: flex-start; }
+  .tip-icon {
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: var(--border-strong);
+    color: var(--text-secondary);
+    font-size: 9px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+  .sort-icon { opacity: 0.4; font-size: 10px; }
+
+  /* Data rows */
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover td { background: #F9F8F5; }
+  tbody tr.inactive { opacity: 0.55; }
+  tbody tr.inactive td { background: var(--inactive) !important; }
+
+  td {
+    padding: 10px 12px;
+    font-size: 13px;
+    text-align: right;
+    vertical-align: middle;
+    position: relative;
+  }
+  td:first-child { text-align: left; }
+
+  td.created-col { background: rgba(235,245,239,0.4); border-left: 1px solid rgba(59,110,82,0.1); border-right: 1px solid rgba(59,110,82,0.1); }
+  td.community-col { background: rgba(247,240,233,0.4); border-left: 1px solid rgba(122,79,45,0.1); border-right: 1px solid rgba(122,79,45,0.1); }
+
+  /* Data bar overlay */
+  .cell-bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cell-num {
+    position: relative;
+    z-index: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  /* School name cell */
+  .school-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+  .school-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .school-link {
+    color: var(--accent);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .school-link:hover { text-decoration: underline; }
+  .inactive-badge {
+    font-size: 10px;
+    font-weight: 500;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-left: 6px;
+    white-space: nowrap;
+  }
+  .top-badge {
+    font-size: 10px;
+    font-weight: 500;
+    background: var(--badge-bg);
+    border: 1px solid var(--badge-border);
+    color: var(--badge-text);
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-left: 6px;
+    white-space: nowrap;
+  }
+
+  .total-cell {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  /* ── Footer row ── */
+  tfoot tr { background: var(--bg); }
+  tfoot td {
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-top: 2px solid var(--border-strong);
+    font-family: 'DM Mono', monospace;
+    color: var(--text-secondary);
+  }
+  tfoot td:first-child {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  /* ── Tooltip ── */
+  .tooltip-wrap { position: relative; display: inline-flex; }
+  .tooltip-wrap:hover .tooltip { opacity: 1; pointer-events: auto; }
+  .tooltip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-primary);
+    color: white;
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    padding: 5px 9px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+    z-index: 100;
+  }
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%; transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: var(--text-primary);
+  }
+
+  /* ── Note banner ── */
+  .note-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: var(--accent-light);
+    border: 1px solid #C1D9EF;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .note-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── View Label ── */
+  .view-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .view-label-text {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .view-label-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* ── School view overlay note ── */
+  .school-view-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 8px 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── Annotation markers (wireframe callouts) ── */
+  .callout-strip {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .callout {
+    background: #FFFBF0;
+    border: 1px dashed #D4B86A;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 11px;
+    color: #6B5500;
+    line-height: 1.5;
+  }
+  .callout strong { display: block; margin-bottom: 3px; font-size: 11px; color: #4A3A00; }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .page-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Top Nav -->
+  <nav class="topnav">
+    <div class="topnav-logo">EduPath LMS</div>
+    <div class="topnav-sep"></div>
+    <div class="topnav-crumb" id="breadcrumb">
+      <a onclick="showDistrict()">Lakewood Unified SD</a>
+      <span class="sep">›</span>
+      <span class="current" id="crumb-current">Usage Report</span>
+    </div>
+    <div class="topnav-right">
+      <span class="topnav-user">District Admin</span>
+      <div class="avatar">DA</div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="page-title">Usage Report <span id="view-subtitle">— All Schools</span></div>
+    <div class="controls">
+      <div class="year-select">
+        <div class="year-label">School Year</div>
+        <select>
+          <option>2024–2025</option>
+          <option>2023–2024</option>
+          <option>2022–2023</option>
+        </select>
+      </div>
+      <div class="toggle-group" id="viewToggle" style="display:none">
+        <button class="toggle-btn active" onclick="setViewMode('school')">By Teacher</button>
+        <button class="toggle-btn" onclick="setViewMode('grade')">By Grade Band</button>
+      </div>
+      <button class="btn-export" onclick="alert('Opens export options: Summary PDF or Raw CSV')">
+        ↓ Export Summary
+      </button>
+      <button class="btn-export btn-export-primary" onclick="alert('Downloads raw CSV for this view')">
+        ↓ Export Data (CSV)
+      </button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- District View -->
+    <div id="district-view">
+      <div class="note-banner">
+        <span class="note-icon">ℹ</span>
+        <span>Showing activity for <strong>2024–2025</strong>. Counts include all assignments regardless of published status. Click any school name to view teacher-level detail.</span>
+      </div>
+
+      <div class="summary-cards">
+        <div class="card card-accent">
+          <div class="card-label">Total Schools</div>
+          <div class="card-value">11</div>
+          <div class="card-sub">9 active · 2 inactive</div>
+        </div>
+        <div class="card card-accent">
+          <div class="card-label">Total Assignments</div>
+          <div class="card-value">14,382</div>
+          <div class="card-sub">Across all schools</div>
+        </div>
+        <div class="card card-green">
+          <div class="card-label">Created Content</div>
+          <div class="card-value">14,382</div>
+          <div class="card-sub">Assignments district-wide</div>
+        </div>
+        <div class="card card-brown">
+          <div class="card-label">Community Activity</div>
+          <div class="card-value">9,140</div>
+          <div class="card-sub">Discussions, feed & groups</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Rubric Adoption</div>
+          <div class="card-value">31%</div>
+          <div class="card-sub">Of scored assignments</div>
+        </div>
+      </div>
+
+      <div class="view-label">
+        <div class="view-label-text">Schools</div>
+        <div class="view-label-line"></div>
+        <div style="font-size:11px;color:var(--text-muted)">Sorted by total assignments ↓ · Inactive schools at bottom</div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr class="group-header-row">
+              <th class="gh-school" rowspan="1"><!-- school col --></th>
+              <th class="gh-created" colspan="5">Created Content</th>
+              <th class="gh-community" colspan="3">Community &amp; Participation</th>
+            </tr>
+            <tr class="col-header-row">
+              <th>
+                <div class="th-inner left">School</div>
+              </th>
+              <!-- Created Content -->
+              <th class="created-col">
+                <div class="th-inner">
+                  Total Assignments
+                  <span class="sort-icon">↕</span>
+                </div>
+              </th>
+              <th class="created-col">
+                <div class="th-inner">
+                  Quizzes
+                  <div class="tooltip-wrap">
+                    <span class="tip-icon">?</span>
+                    <div class="tooltip">Assignments created as quizzes or assessments</div>
+                  </div>
+                </div>
+              </th>
+              <th class="created-col">
+                <div class="th-inner">
+                  Submissions
+                  <div class="tooltip-wrap">
+                    <span class="tip-icon">?</span>
+                    <div class="tooltip">File upload or text submission assignments</div>
+                  </div>
+                </div>
+              </th>
+              <th class="created-col">
+                <div class="th-inner">
+                  Discussion Assign.
+                  <div class="tooltip-wrap">
+                    <span class="tip-icon">?</span>
+                    <div class="tooltip">Assignments that require a discussion thread response</div>
+                  </div>
+                </div>
+              </th>
+              <th class="created-col">
+                <div class="th-inner">
+                  Rubric Assign.
+                  <div class="tooltip-wrap">
+                    <span class="tip-icon">?</span>
+                    <div class="tooltip">Assignments scored using a grading rubric</div>
+                  </div>
+                </div>
+              </th>
+              <!-- Community -->
+              <th class="community-col">
+                <div class="th-inner">
+                  Discussions
+                  <div class="tooltip-wrap">
+                    <span class="tip-icon">?</span>
+                    <div class="tooltip">Standalone discussion threads created (not assignment-linked)</div>
+                  </div>
+                </div>
+              </th>
+              <th class="community-col">
+                <div class="th-inner">
+                  Section Feed
+                  <div class="tooltip-wrap">
+                    <span class="tip-icon">?</span>
+                    <div class="tooltip">Posts and activity within section feeds</div>
+                  </div>
+                </div>
+              </th>
+              <th class="community-col">
+                <div class="th-inner">
+                  Group Participation
+                  <div class="tooltip-wrap">
+                    <span class="tip-icon">?</span>
+                    <div class="tooltip">Student group creation and activity events</div>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Active rows -->
+            <tr onclick="showSchool('Jefferson Middle School')" style="cursor:pointer">
+              <td>
+                <div class="school-name">
+                  <div class="school-icon">🏫</div>
+                  <a class="school-link">Jefferson Middle School</a>
+                  <span class="top-badge">★ High Engagement</span>
+                </div>
+              </td>
+              <td><div class="cell-bar" style="width:92%;background:var(--bar-a)"></div><span class="cell-num total-cell">2,418</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:88%;background:var(--bar-b)"></div><span class="cell-num">612</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:90%;background:var(--bar-b)"></div><span class="cell-num">843</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:60%;background:var(--bar-b)"></div><span class="cell-num">410</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:75%;background:var(--bar-b)"></div><span class="cell-num">553</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:82%;background:var(--bar-c)"></div><span class="cell-num">328</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:70%;background:var(--bar-c)"></div><span class="cell-num">214</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:55%;background:var(--bar-c)"></div><span class="cell-num">189</span></td>
+            </tr>
+            <tr onclick="showSchool('Lincoln Elementary')" style="cursor:pointer">
+              <td>
+                <div class="school-name">
+                  <div class="school-icon">🏫</div>
+                  <a class="school-link">Lincoln Elementary</a>
+                  <span class="top-badge">★ High Engagement</span>
+                </div>
+              </td>
+              <td><div class="cell-bar" style="width:78%;background:var(--bar-a)"></div><span class="cell-num total-cell">2,051</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:72%;background:var(--bar-b)"></div><span class="cell-num">498</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:80%;background:var(--bar-b)"></div><span class="cell-num">710</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:42%;background:var(--bar-b)"></div><span class="cell-num">287</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:48%;background:var(--bar-b)"></div><span class="cell-num">356</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:60%;background:var(--bar-c)"></div><span class="cell-num">241</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:50%;background:var(--bar-c)"></div><span class="cell-num">162</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:35%;background:var(--bar-c)"></div><span class="cell-num">128</span></td>
+            </tr>
+            <tr onclick="showSchool('Riverside High School')" style="cursor:pointer">
+              <td>
+                <div class="school-name">
+                  <div class="school-icon">🏫</div>
+                  <a class="school-link">Riverside High School</a>
+                </div>
+              </td>
+              <td><div class="cell-bar" style="width:65%;background:var(--bar-a)"></div><span class="cell-num total-cell">1,720</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:58%;background:var(--bar-b)"></div><span class="cell-num">405</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:62%;background:var(--bar-b)"></div><span class="cell-num">580</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:30%;background:var(--bar-b)"></div><span class="cell-num">198</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:22%;background:var(--bar-b)"></div><span class="cell-num">150</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:44%;background:var(--bar-c)"></div><span class="cell-num">178</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:30%;background:var(--bar-c)"></div><span class="cell-num">98</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:20%;background:var(--bar-c)"></div><span class="cell-num">74</span></td>
+            </tr>
+            <tr onclick="showSchool('Washington K-8')" style="cursor:pointer">
+              <td>
+                <div class="school-name">
+                  <div class="school-icon">🏫</div>
+                  <a class="school-link">Washington K-8</a>
+                </div>
+              </td>
+              <td><div class="cell-bar" style="width:52%;background:var(--bar-a)"></div><span class="cell-num total-cell">1,384</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:45%;background:var(--bar-b)"></div><span class="cell-num">312</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:48%;background:var(--bar-b)"></div><span class="cell-num">447</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:22%;background:var(--bar-b)"></div><span class="cell-num">148</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:18%;background:var(--bar-b)"></div><span class="cell-num">120</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:32%;background:var(--bar-c)"></div><span class="cell-num">130</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:22%;background:var(--bar-c)"></div><span class="cell-num">72</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:12%;background:var(--bar-c)"></div><span class="cell-num">44</span></td>
+            </tr>
+            <tr onclick="showSchool('Roosevelt Elementary')" style="cursor:pointer">
+              <td>
+                <div class="school-name">
+                  <div class="school-icon">🏫</div>
+                  <a class="school-link">Roosevelt Elementary</a>
+                </div>
+              </td>
+              <td><div class="cell-bar" style="width:40%;background:var(--bar-a)"></div><span class="cell-num total-cell">1,052</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:34%;background:var(--bar-b)"></div><span class="cell-num">238</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:37%;background:var(--bar-b)"></div><span class="cell-num">341</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:14%;background:var(--bar-b)"></div><span class="cell-num">94</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:10%;background:var(--bar-b)"></div><span class="cell-num">68</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:22%;background:var(--bar-c)"></div><span class="cell-num">88</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:14%;background:var(--bar-c)"></div><span class="cell-num">46</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:8%;background:var(--bar-c)"></div><span class="cell-num">28</span></td>
+            </tr>
+            <tr onclick="showSchool('Madison Elementary')" style="cursor:pointer">
+              <td>
+                <div class="school-name">
+                  <div class="school-icon">🏫</div>
+                  <a class="school-link">Madison Elementary</a>
+                </div>
+              </td>
+              <td><div class="cell-bar" style="width:28%;background:var(--bar-a)"></div><span class="cell-num total-cell">738</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:22%;background:var(--bar-b)"></div><span class="cell-num">164</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:25%;background:var(--bar-b)"></div><span class="cell-num">245</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:9%;background:var(--bar-b)"></div><span class="cell-num">62</span></td>
+              <td class="created-col"><div class="cell-bar" style="width:6%;background:var(--bar-b)"></div><span class="cell-num">40</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:14%;background:var(--bar-c)"></div><span class="cell-num">56</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:8%;background:var(--bar-c)"></div><span class="cell-num">28</span></td>
+              <td class="community-col"><div class="cell-bar" style="width:5%;background:var(--bar-c)"></div><span class="cell-num">18</span></td>
+            </tr>
+            <!-- More schools -->
+            <tr onclick="showSchool('Adams Middle School')" style="cursor:pointer">
+              <td><div class="school-name"><div class="school-icon">🏫</div><a class="school-link">Adams Middle School</a></div></td>
+              <td><div class="cell-bar" style="width:22%;background:var(--bar-a)"></div><span class="cell-num total-cell">580</span></td>
+              <td class="created-col"><span class="cell-num">120</span></td>
+              <td class="created-col"><span class="cell-num">210</span></td>
+              <td class="created-col"><span class="cell-num">88</span></td>
+              <td class="created-col"><span class="cell-num">30</span></td>
+              <td class="community-col"><span class="cell-num">48</span></td>
+              <td class="community-col"><span class="cell-num">22</span></td>
+              <td class="community-col"><span class="cell-num">14</span></td>
+            </tr>
+            <tr onclick="showSchool('Monroe High School')" style="cursor:pointer">
+              <td><div class="school-name"><div class="school-icon">🏫</div><a class="school-link">Monroe High School</a></div></td>
+              <td><div class="cell-bar" style="width:16%;background:var(--bar-a)"></div><span class="cell-num total-cell">420</span></td>
+              <td class="created-col"><span class="cell-num">88</span></td>
+              <td class="created-col"><span class="cell-num">162</span></td>
+              <td class="created-col"><span class="cell-num">44</span></td>
+              <td class="created-col"><span class="cell-num">18</span></td>
+              <td class="community-col"><span class="cell-num">32</span></td>
+              <td class="community-col"><span class="cell-num">14</span></td>
+              <td class="community-col"><span class="cell-num">8</span></td>
+            </tr>
+            <tr onclick="showSchool('Eastview Elementary')" style="cursor:pointer">
+              <td><div class="school-name"><div class="school-icon">🏫</div><a class="school-link">Eastview Elementary</a></div></td>
+              <td><div class="cell-bar" style="width:10%;background:var(--bar-a)"></div><span class="cell-num total-cell">260</span></td>
+              <td class="created-col"><span class="cell-num">52</span></td>
+              <td class="created-col"><span class="cell-num">104</span></td>
+              <td class="created-col"><span class="cell-num">38</span></td>
+              <td class="created-col"><span class="cell-num">14</span></td>
+              <td class="community-col"><span class="cell-num">20</span></td>
+              <td class="community-col"><span class="cell-num">8</span></td>
+              <td class="community-col"><span class="cell-num">4</span></td>
+            </tr>
+            <!-- Inactive Schools -->
+            <tr class="inactive">
+              <td>
+                <div class="school-name">
+                  <div class="school-icon" style="opacity:0.5">🏫</div>
+                  <span style="color:var(--text-muted)">Westside Charter</span>
+                  <span class="inactive-badge">No activity this year</span>
+                </div>
+              </td>
+              <td><span class="cell-num total-cell">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="community-col"><span class="cell-num">—</span></td>
+              <td class="community-col"><span class="cell-num">—</span></td>
+              <td class="community-col"><span class="cell-num">—</span></td>
+            </tr>
+            <tr class="inactive">
+              <td>
+                <div class="school-name">
+                  <div class="school-icon" style="opacity:0.5">🏫</div>
+                  <span style="color:var(--text-muted)">Oak Hill K-8</span>
+                  <span class="inactive-badge">No activity this year</span>
+                </div>
+              </td>
+              <td><span class="cell-num total-cell">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="community-col"><span class="cell-num">—</span></td>
+              <td class="community-col"><span class="cell-num">—</span></td>
+              <td class="community-col"><span class="cell-num">—</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>District Total (active schools)</td>
+              <td>14,382</td>
+              <td class="created-col">2,489</td>
+              <td class="created-col">4,642</td>
+              <td class="created-col">1,369</td>
+              <td class="created-col">1,349</td>
+              <td class="community-col">1,121</td>
+              <td class="community-col">664</td>
+              <td class="community-col">507</td>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="school-view-note">* Clicking a school name opens the teacher-level view for that school.</div>
+      </div>
+
+      <!-- Wireframe callouts -->
+      <div class="callout-strip">
+        <div class="callout"><strong>① Column Groups</strong>Two color-coded groups — Created Content (green) and Community &amp; Participation (brown) — help admins scan by category.</div>
+        <div class="callout"><strong>② Data Bars</strong>Subtle background fills behind each number give a quick visual sense of relative volume without requiring column sorting.</div>
+        <div class="callout"><strong>③ High Engagement Badge</strong>Applied to schools above a threshold (TBD with stakeholders). Not a ranking — just a signal worth acting on.</div>
+        <div class="callout"><strong>④ Inactive Treatment</strong>Muted row + "No activity this year" label. Sorted to the bottom. Visible but not alarming.</div>
+        <div class="callout"><strong>⑤ Tooltip Help Icons</strong>Each column header includes a ? icon with a plain-language definition of what the metric counts.</div>
+        <div class="callout"><strong>⑥ Drill-down</strong>Clicking any active school navigates to teacher-level view (see School View below).</div>
+      </div>
+    </div>
+
+    <!-- School View (hidden initially) -->
+    <div id="school-view" style="display:none">
+      <div class="note-banner">
+        <span class="note-icon">ℹ</span>
+        <span>Showing teacher-level activity for <strong id="school-name-display"></strong>, <strong>2024–2025</strong>. Click any column header to sort.</span>
+      </div>
+
+      <div class="summary-cards">
+        <div class="card card-accent">
+          <div class="card-label">Active Teachers</div>
+          <div class="card-value">24</div>
+          <div class="card-sub">3 with no activity</div>
+        </div>
+        <div class="card card-accent">
+          <div class="card-label">Total Assignments</div>
+          <div class="card-value">2,418</div>
+          <div class="card-sub">Avg 101 per teacher</div>
+        </div>
+        <div class="card card-green">
+          <div class="card-label">Rubric Adoption</div>
+          <div class="card-value">23%</div>
+          <div class="card-sub">of scored assignments</div>
+        </div>
+        <div class="card card-brown">
+          <div class="card-label">Community Activity</div>
+          <div class="card-value">731</div>
+          <div class="card-sub">Discussions, feed &amp; groups</div>
+        </div>
+      </div>
+
+      <div class="view-label">
+        <div class="view-label-text">Teachers</div>
+        <div class="view-label-line"></div>
+        <div style="font-size:11px;color:var(--text-muted)">Sorted by total assignments ↓</div>
+      </div>
+
+      <div class="toggle-group" style="margin-bottom:12px;display:inline-flex">
+        <button class="toggle-btn active">By Teacher</button>
+        <button class="toggle-btn">By Grade Band</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr class="group-header-row">
+              <th class="gh-school"></th>
+              <th class="gh-created" colspan="5">Created Content</th>
+              <th class="gh-community" colspan="3">Community &amp; Participation</th>
+            </tr>
+            <tr class="col-header-row">
+              <th><div class="th-inner left">Teacher</div></th>
+              <th class="created-col"><div class="th-inner">Total Assignments <span class="sort-icon">↕</span></div></th>
+              <th class="created-col"><div class="th-inner">Quizzes</div></th>
+              <th class="created-col"><div class="th-inner">Submissions</div></th>
+              <th class="created-col"><div class="th-inner">Discussion Assign.</div></th>
+              <th class="created-col"><div class="th-inner">Rubric Assign.</div></th>
+              <th class="community-col"><div class="th-inner">Discussions</div></th>
+              <th class="community-col"><div class="th-inner">Section Feed</div></th>
+              <th class="community-col"><div class="th-inner">Group Participation</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="school-name"><div class="school-icon">👤</div><span>Kim, S.</span><span class="top-badge">★ LMS Champion</span></div></td>
+              <td><div class="cell-bar" style="width:95%;background:var(--bar-a)"></div><span class="cell-num total-cell">248</span></td>
+              <td class="created-col"><span class="cell-num">72</span></td>
+              <td class="created-col"><span class="cell-num">88</span></td>
+              <td class="created-col"><span class="cell-num">54</span></td>
+              <td class="created-col"><span class="cell-num">62</span></td>
+              <td class="community-col"><span class="cell-num">48</span></td>
+              <td class="community-col"><span class="cell-num">34</span></td>
+              <td class="community-col"><span class="cell-num">22</span></td>
+            </tr>
+            <tr>
+              <td><div class="school-name"><div class="school-icon">👤</div><span>Torres, M.</span><span class="top-badge">★ LMS Champion</span></div></td>
+              <td><div class="cell-bar" style="width:82%;background:var(--bar-a)"></div><span class="cell-num total-cell">214</span></td>
+              <td class="created-col"><span class="cell-num">58</span></td>
+              <td class="created-col"><span class="cell-num">78</span></td>
+              <td class="created-col"><span class="cell-num">44</span></td>
+              <td class="created-col"><span class="cell-num">48</span></td>
+              <td class="community-col"><span class="cell-num">38</span></td>
+              <td class="community-col"><span class="cell-num">28</span></td>
+              <td class="community-col"><span class="cell-num">18</span></td>
+            </tr>
+            <tr>
+              <td><div class="school-name"><div class="school-icon">👤</div><span>Patel, R.</span><span class="top-badge">★ LMS Champion</span></div></td>
+              <td><div class="cell-bar" style="width:72%;background:var(--bar-a)"></div><span class="cell-num total-cell">188</span></td>
+              <td class="created-col"><span class="cell-num">44</span></td>
+              <td class="created-col"><span class="cell-num">70</span></td>
+              <td class="created-col"><span class="cell-num">38</span></td>
+              <td class="created-col"><span class="cell-num">40</span></td>
+              <td class="community-col"><span class="cell-num">30</span></td>
+              <td class="community-col"><span class="cell-num">20</span></td>
+              <td class="community-col"><span class="cell-num">14</span></td>
+            </tr>
+            <tr>
+              <td><div class="school-name"><div class="school-icon">👤</div><span>Chen, A.</span></div></td>
+              <td><div class="cell-bar" style="width:58%;background:var(--bar-a)"></div><span class="cell-num total-cell">150</span></td>
+              <td class="created-col"><span class="cell-num">38</span></td>
+              <td class="created-col"><span class="cell-num">58</span></td>
+              <td class="created-col"><span class="cell-num">28</span></td>
+              <td class="created-col"><span class="cell-num">26</span></td>
+              <td class="community-col"><span class="cell-num">22</span></td>
+              <td class="community-col"><span class="cell-num">14</span></td>
+              <td class="community-col"><span class="cell-num">10</span></td>
+            </tr>
+            <tr>
+              <td><div class="school-name"><div class="school-icon">👤</div><span>Williams, D.</span></div></td>
+              <td><div class="cell-bar" style="width:44%;background:var(--bar-a)"></div><span class="cell-num total-cell">114</span></td>
+              <td class="created-col"><span class="cell-num">28</span></td>
+              <td class="created-col"><span class="cell-num">44</span></td>
+              <td class="created-col"><span class="cell-num">18</span></td>
+              <td class="created-col"><span class="cell-num">12</span></td>
+              <td class="community-col"><span class="cell-num">14</span></td>
+              <td class="community-col"><span class="cell-num">8</span></td>
+              <td class="community-col"><span class="cell-num">6</span></td>
+            </tr>
+            <tr>
+              <td><div class="school-name"><div class="school-icon">👤</div><span>Johnson, T.</span></div></td>
+              <td><div class="cell-bar" style="width:30%;background:var(--bar-a)"></div><span class="cell-num total-cell">78</span></td>
+              <td class="created-col"><span class="cell-num">18</span></td>
+              <td class="created-col"><span class="cell-num">32</span></td>
+              <td class="created-col"><span class="cell-num">10</span></td>
+              <td class="created-col"><span class="cell-num">6</span></td>
+              <td class="community-col"><span class="cell-num">8</span></td>
+              <td class="community-col"><span class="cell-num">4</span></td>
+              <td class="community-col"><span class="cell-num">2</span></td>
+            </tr>
+            <tr>
+              <td><div class="school-name"><div class="school-icon">👤</div><span>Martinez, L.</span></div></td>
+              <td><div class="cell-bar" style="width:20%;background:var(--bar-a)"></div><span class="cell-num total-cell">52</span></td>
+              <td class="created-col"><span class="cell-num">10</span></td>
+              <td class="created-col"><span class="cell-num">22</span></td>
+              <td class="created-col"><span class="cell-num">8</span></td>
+              <td class="created-col"><span class="cell-num">4</span></td>
+              <td class="community-col"><span class="cell-num">6</span></td>
+              <td class="community-col"><span class="cell-num">2</span></td>
+              <td class="community-col"><span class="cell-num">2</span></td>
+            </tr>
+            <tr class="inactive">
+              <td><div class="school-name"><div class="school-icon" style="opacity:0.5">👤</div><span style="color:var(--text-muted)">Brown, C.</span><span class="inactive-badge">No activity this year</span></div></td>
+              <td><span class="cell-num total-cell">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="created-col"><span class="cell-num">—</span></td>
+              <td class="community-col"><span class="cell-num">—</span></td>
+              <td class="community-col"><span class="cell-num">—</span></td>
+              <td class="community-col"><span class="cell-num">—</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>School Total (active teachers)</td>
+              <td>2,418</td>
+              <td class="created-col">612</td>
+              <td class="created-col">843</td>
+              <td class="created-col">410</td>
+              <td class="created-col">553</td>
+              <td class="community-col">328</td>
+              <td class="community-col">214</td>
+              <td class="community-col">189</td>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="school-view-note">* "LMS Champion" badge applied to top 3 teachers by total activity. Label and threshold to be validated with school admins.</div>
+      </div>
+
+      <div class="callout-strip">
+        <div class="callout"><strong>① LMS Champion Badge</strong>Applied to top 3 teachers by activity. Gives school admins a fast signal for peer coaching candidates without imposing a hard ranking.</div>
+        <div class="callout"><strong>② Alphabetical Default</strong>Table defaults to sort by total assignments desc, but column headers are clickable to resort. Avoids the punitive "bottom of the list" framing on first load.</div>
+        <div class="callout"><strong>③ School Summary Cards</strong>Per-school aggregates at the top mirror district-level cards, so context is always visible before the detail table.</div>
+        <div class="callout"><strong>④ Grade Band Toggle</strong>Future view: roll up teacher data by grade band (K–2, 3–5, 6–8, 9–12) for schools that want a different level of analysis.</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function showSchool(name) {
+    document.getElementById('district-view').style.display = 'none';
+    document.getElementById('school-view').style.display = 'block';
+    document.getElementById('school-name-display').textContent = name;
+    document.getElementById('view-subtitle').textContent = '— ' + name;
+    document.getElementById('crumb-current').innerHTML =
+      '<a onclick="showDistrict()" style="color:white;text-decoration:none;opacity:0.85;cursor:pointer">Usage Report</a> <span style="opacity:0.4">›</span> <span>' + name + '</span>';
+    window.scrollTo(0, 0);
+  }
+
+  function showDistrict() {
+    document.getElementById('district-view').style.display = 'block';
+    document.getElementById('school-view').style.display = 'none';
+    document.getElementById('view-subtitle').textContent = '— All Schools';
+    document.getElementById('crumb-current').textContent = 'Usage Report';
+    window.scrollTo(0, 0);
+  }
+
+  function setViewMode(mode) {
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
